@@ -149,13 +149,13 @@ faltaBombasTexto bombas matriz = do
     let bombasPossiveis = qtBombas - bombas
     if (bombasPossiveis <= 0 ) then do
         putStrLn "---------------------------------------------"
-        putStrLn ("Quantidade de formigueiros rasga-línguas:"++ show bombas ++ "  ")
-        putStrLn "Formigueiros possíveis: 0"
+        putStrLn ("Quantidade de BOMBAS:"++ show bombas ++ "  ")
+        putStrLn "BOMBAS: 0"
         putStrLn "---------------------------------------------"
     else do
         putStrLn "---------------------------------------------"
-        putStrLn ("Quantidade de formigueiros rasga-línguas:"++ show bombas ++"  ")
-        putStrLn ("Formigueiros possíveis: " ++ show bombasPossiveis ++"")                           
+        putStrLn ("Quantidade de BOMBAS:"++ show bombas ++"  ")
+        putStrLn ("BOMBAS: " ++ show bombasPossiveis ++"")                           
         putStrLn "---------------------------------------------"
         
 
