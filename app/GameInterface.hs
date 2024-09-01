@@ -4,17 +4,24 @@ import Minesweeper
 
 displayBoard :: Board -> IO ()
 displayBoard board = do
-  putStrLn "   1  2  3  4  5  6  7  8"
+  putStrLn header
   mapM_ printRow (zip ['A' ..] board)
   where
-    printRow (r, row) = putStr (r : " ") >> putStrLn (concatMap showCell row)
+    header = "   " ++ unwords [charToStr i | i <- [1 .. (length (head board))]]
+    charToStr i = [toEnum (i + fromEnum 'A' - 1) :: Char]
+    printRow (r, row) = putStr (charToNumberString r ++ " ") >> putStrLn (concatMap showCell row)
     showCell (Mine, Hidden) = "■ "
     showCell (Mine, Revealed) = "* "
     showCell (Number n, Hidden) = "■ "
     showCell (Number n, Revealed) = show n ++ " "
-    showCell (Empty, Hidden) = "■ "
-    showCell (Empty, Revealed) = "0 "
     showCell (_, Flagged) = "F "
+
+charToNumberString :: Char -> String
+charToNumberString c
+  | num <= 9  = " " ++ show num
+  | otherwise = show num
+  where
+    num = fromEnum c - fromEnum 'A' + 1
 
 getUserAction :: IO (String, (Int, Int))
 getUserAction = do
@@ -25,5 +32,5 @@ getUserAction = do
   return (action, pos)
 
 parseCoords :: String -> (Int, Int)
-parseCoords (blank : r : c) = ((read c :: Int) - 1, fromEnum r - fromEnum 'A')
+parseCoords (blank : r : c) = (fromEnum r - fromEnum 'A', (read c :: Int) - 1)
 parseCoords _ = (0, 0)

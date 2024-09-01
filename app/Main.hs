@@ -52,14 +52,22 @@ parseMode :: String -> Mode
 parseMode "C" = Classic
 parseMode "S" = Survival
 parseMode "T" = Timed
+parseMode "c" = Classic
+parseMode "s" = Survival
+parseMode "t" = Timed
+parseMode _ = Classic
 
 parseDifficulty :: String -> Difficulty
 parseDifficulty "F" = Easy
 parseDifficulty "M" = Medium
 parseDifficulty "D" = Hard
+parseDifficulty "f" = Easy
+parseDifficulty "m" = Medium
+parseDifficulty "d" = Hard
+parseDifficulty _ = Easy
 
 getTimerDuration :: Difficulty -> Int
-getTimerDuration Easy = 60
-getTimerDuration Medium = 120
-getTimerDuration Hard = 180
+getTimerDuration Easy = 360
+getTimerDuration Medium = 180
+getTimerDuration Hard = 60
 

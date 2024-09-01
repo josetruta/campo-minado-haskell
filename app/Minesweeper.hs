@@ -2,7 +2,7 @@ module Minesweeper (initializeBoard, Difficulty (..), Mode (..), Board, Cell (..
 
 import System.Random (randomRIO)
 
-data Cell = Mine | Number Int | Empty deriving (Show, Eq)
+data Cell = Mine | Number Int deriving (Show, Eq)
 
 data State = Hidden | Revealed | Flagged deriving (Show, Eq)
 

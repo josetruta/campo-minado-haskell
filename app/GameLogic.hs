@@ -33,8 +33,8 @@ updateBoard board (x, y) val = take y board ++ [take x row ++ [val] ++ drop (x +
 checkVictory :: Board -> Bool
 checkVictory board = all revealedOrFlagged (concat board)
   where
-    revealedOrFlagged (Mine, Flagged) = True
-    revealedOrFlagged (_, Revealed) = True
+    revealedOrFlagged (Mine, _) = True
+    revealedOrFlagged (Number n, Revealed) = True
     revealedOrFlagged _ = False
 
 checkDefeat :: Board -> Bool
