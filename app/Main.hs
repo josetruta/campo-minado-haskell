@@ -42,7 +42,7 @@ gameLoop mode board startTime = do
             displayBoard newBoard
             putStrLn "Você venceu!"
             endTimer startTime
-        else if checkDefeat newBoard
+        else if checkDefeat mode newBoard
             then do
                 displayBoard newBoard
                 putStrLn "Você perdeu!"
