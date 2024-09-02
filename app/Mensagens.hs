@@ -3,7 +3,8 @@ module Mensagens(
 menssagemVitoria,
 mensagemDerrota,
 menssagemMenu,
-mensagemDificuldade
+mensagemDificuldade,
+mensagemTempo
 
 )where
 
@@ -58,7 +59,19 @@ mensagemPerdeu = do
     putStrLn "░░░░█░█░█▀█░█▀▀░█▀▀░░░█▀█░█▀▀░█▀█░█▀▄░█▀▀░█░█░█░░░░░"
     putStrLn "░░░░▀▄▀░█▄█░█▄▄░██▄░░░█▀▀░██▄░█▀▄░█▄▀░██▄░█▄█░▄░░░░░"
     putStrLn "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
+
+
+mensagemTempo :: IO()
+mensagemTempo = do
     
+    putStrLn "___________________________________________________"
+    putStrLn "|                                                  |"
+    putStrLn "|░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░|"
+    putStrLn "|░░▀█▀░█▀▀░█▀▄▀█░█▀█░█▀█░░▄▀█░█▀▀░▄▀█░█▄▄░█▀█░█░█░░|"
+    putStrLn "|░░░█░░██▄░█░▀░█░█▀▀░█▄█░░█▀█░█▄▄░█▀█░█▄█░█▄█░█▄█░░|"
+    putStrLn "|░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░|"
+
+
 mensagemDificuldade :: IO()
 mensagemDificuldade = do
 
@@ -74,3 +87,5 @@ mensagemDificuldade = do
     putStrLn "|                   (M) MEDIO                         |" 
     putStrLn "|                   (D) DIFICIL                       |" 
     putStrLn "|_____________________________________________________|"
+
+

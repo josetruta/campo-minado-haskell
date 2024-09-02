@@ -46,6 +46,9 @@ gameLoop mode board startTime = do
             then do
                 displayBoard newBoard
                 Mensagens.mensagemDerrota
+                Mensagens.mensagemTempo
+                putStrLn "|       (insira o tempo aqui jose)                |"
+                putStrLn "|_________________________________________________|"
             else gameLoop mode newBoard startTime
 
 parseMode :: String -> Mode
