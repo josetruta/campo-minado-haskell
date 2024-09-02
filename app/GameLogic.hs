@@ -37,8 +37,15 @@ checkVictory board = all revealedOrFlagged (concat board)
     revealedOrFlagged (Number n, Revealed) = True
     revealedOrFlagged _ = False
 
-checkDefeat :: Board -> Bool
-checkDefeat board = any mineRevealed (concat board)
-  where
-    mineRevealed (Mine, Revealed) = True
-    mineRevealed _ = False
+checkDefeat :: Mode -> Board -> Bool
+checkDefeat mode board =
+  case mode of 
+    Survival -> any mineRevealedOrNumberFlagged (concat board)
+      where
+        mineRevealedOrNumberFlagged (Mine, Revealed) = True
+        mineRevealedOrNumberFlagged (Number n, Flagged) = True
+        mineRevealedOrNumberFlagged _ = False
+    _ -> any mineRevealed (concat board)
+      where
+        mineRevealed (Mine, Revealed) = True
+        mineRevealed _ = False

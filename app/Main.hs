@@ -43,7 +43,7 @@ gameLoop mode board startTime = do
             displayBoard newBoard
             Mensagens.menssagemVitoria
             endTimer startTime
-        else if checkDefeat newBoard
+        else if checkDefeat mode newBoard
             then do
                 displayBoard newBoard
                 Mensagens.mensagemDerrota

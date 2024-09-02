@@ -11,10 +11,10 @@ displayBoard board = do
     charToStr i = [toEnum (i + fromEnum 'A' - 1) :: Char]
     printRow (r, row) = putStr (charToNumberString r ++ " ") >> putStrLn (concatMap showCell row)
     showCell (Mine, Hidden) = "■ "
-    showCell (Mine, Revealed) = "* "
+    showCell (Mine, Revealed) = "● "
     showCell (Number n, Hidden) = "■ "
     showCell (Number n, Revealed) = show n ++ " "
-    showCell (_, Flagged) = "F "
+    showCell (_, Flagged) = "▸ "
 
 charToNumberString :: Char -> String
 charToNumberString c
