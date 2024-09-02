@@ -7,6 +7,7 @@ import Minesweeper
 import GameInterface
 import GameLogic
 import Timer
+import Mensagens
 
 main :: IO ()
 main = do
@@ -40,12 +41,12 @@ gameLoop mode board startTime = do
     if checkVictory newBoard
         then do
             displayBoard newBoard
-            putStrLn "Você venceu!"
+            Mensagens.menssagemVitoria
             endTimer startTime
         else if checkDefeat newBoard
             then do
                 displayBoard newBoard
-                putStrLn "Você perdeu!"
+                Mensagens.mensagemDerrota
             else gameLoop mode newBoard startTime
 
 parseMode :: String -> Mode
