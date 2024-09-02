@@ -28,7 +28,7 @@ menuCard = do
     putStrLn "|                                                                                                 |"
     putStrLn "|                                       (C) CLASSICO                                              |" 
     putStrLn "|                                       (S) SOBREVIVENCIA                                         |" 
-    putStrLn "|                                       (T) CONTRA O TEMPO                                                 |" 
+    putStrLn "|                                       (T) CONTRA O TEMPO                                        |" 
     putStrLn "|_________________________________________________________________________________________________|"
 
 
