@@ -11,10 +11,9 @@ import Mensagens
 
 main :: IO ()
 main = do
-    putStrLn "Bem-vindo ao Campo Minado!"
-    putStrLn "Escolha o modo de jogo: (C)lássico, (S)obrevivência, ou (T)empo:"
+    Mensagens.menssagemMenu
     modeInput <- getLine
-    putStrLn "Escolha o nível de dificuldade: (F)ácil, (M)édio, ou (D)ifícil:"
+    Mensagens.mensagemDificuldade
     diffInput <- getLine
 
     let mode = parseMode modeInput
