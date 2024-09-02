@@ -1,52 +1,62 @@
 module Main (main) where
 
--- import Lib
-import System.Clock
+import System.Clock ( TimeSpec, Clock (Monotonic), toNanoSecs, diffTimeSpec, getTime )
 
 import Minesweeper
-import GameInterface
-import GameLogic
-import Timer
+    ( Mode(..), Difficulty(..), Board, initializeBoard )
+import GameInterface ( displayBoard, getUserAction )
+import GameLogic ( dig, flag, checkVictory, checkDefeat )
+import Timer ( startTimer, endTimer, currTimer )
+import TextCards ( winsCard, losesCard, menuCard, levelCard, timesOverCard )
 
 main :: IO ()
 main = do
-    putStrLn "Bem-vindo ao Campo Minado!"
-    putStrLn "Escolha o modo de jogo: (C)lássico, (S)obrevivência, ou (T)empo:"
+    menuCard
     modeInput <- getLine
-    putStrLn "Escolha o nível de dificuldade: (F)ácil, (M)édio, ou (D)ifícil:"
+    levelCard
     diffInput <- getLine
 
     let mode = parseMode modeInput
     let difficulty = parseDifficulty diffInput
     board <- initializeBoard difficulty
 
-    case mode of
-        Timed -> do
-            startCountdown (getTimerDuration difficulty)
-            startGame mode board
-        _ -> startGame mode board
+    startGame mode difficulty board
 
-startGame :: Mode -> Board -> IO ()
-startGame mode board = do
+startGame :: Mode -> Difficulty -> Board -> IO ()
+startGame mode difficulty board = do
     startTime <- startTimer
-    gameLoop mode board startTime
+    case mode of
+        Timed -> gameLoop mode board startTime (getTimerDuration difficulty)
+        _ -> gameLoop mode board startTime 0
 
-gameLoop :: Mode -> Board -> TimeSpec -> IO ()
-gameLoop mode board startTime = do
+gameLoop :: Mode -> Board -> TimeSpec -> Int -> IO ()
+gameLoop mode board startTime timerDuration = do
     displayBoard board
     (action, pos) <- getUserAction
     let newBoard = if action == "D" then dig board pos else flag board pos
-
+    
     if checkVictory newBoard
         then do
             displayBoard newBoard
-            putStrLn "Você venceu!"
+            winsCard
             endTimer startTime
         else if checkDefeat mode newBoard
             then do
                 displayBoard newBoard
-                putStrLn "Você perdeu!"
-            else gameLoop mode newBoard startTime
+                losesCard
+                endTimer startTime
+            else case mode of 
+                Timed ->
+                    do
+                    curr <- getTime Monotonic
+                    let currTime = toNanoSecs (diffTimeSpec curr startTime) `div` (10 ^ 9)
+                    if currTime >= toInteger timerDuration
+                        then do
+                            timesOverCard
+                        else do
+                            currTimer startTime
+                            gameLoop mode newBoard startTime timerDuration
+                _ -> gameLoop mode newBoard startTime timerDuration
 
 parseMode :: String -> Mode
 parseMode "C" = Classic
@@ -67,7 +77,7 @@ parseDifficulty "d" = Hard
 parseDifficulty _ = Easy
 
 getTimerDuration :: Difficulty -> Int
-getTimerDuration Easy = 360
-getTimerDuration Medium = 180
-getTimerDuration Hard = 60
+getTimerDuration Easy = 100
+getTimerDuration Medium = 200
+getTimerDuration Hard = 360
 

@@ -1,23 +1,17 @@
-module Timer (startTimer, endTimer, startCountdown) where
+module Timer (startTimer, endTimer, currTimer) where
 
 import System.Clock
-import Control.Concurrent
+    ( TimeSpec, diffTimeSpec, getTime, toNanoSecs, Clock(Monotonic) )
 
 startTimer :: IO TimeSpec
 startTimer = getTime Monotonic
 
+currTimer :: TimeSpec -> IO ()
+currTimer start = do
+  curr <- getTime Monotonic
+  putStrLn $ "\n>> Tempo decorrido: " ++ show (toNanoSecs (diffTimeSpec curr start) `div` (10 ^ 9)) ++ " segundos\n"
+
 endTimer :: TimeSpec -> IO ()
 endTimer start = do
   end <- getTime Monotonic
-  putStrLn $ "Tempo decorrido: " ++ show (toNanoSecs (diffTimeSpec end start) `div` (10 ^ 9)) ++ " segundos."
-
-startCountdown :: Int -> IO ()
-startCountdown seconds = do
-  putStrLn $ "Você tem " ++ show seconds ++ " segundos para completar o jogo!"
-  countdown seconds
-  where
-    countdown 0 = putStrLn "Tempo esgotado!"
-    countdown n = do
-      putStrLn $ show n ++ "..."
-      threadDelay 1000000 -- Atraso de 1 segundo
-      countdown (n - 1)
+  putStrLn $ "\n>> Tempo decorrido: " ++ show (toNanoSecs (diffTimeSpec end start) `div` (10 ^ 9)) ++ " segundos."

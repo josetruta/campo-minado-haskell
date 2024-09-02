@@ -66,7 +66,8 @@ executable campo-minado
     other-modules:    Minesweeper,
                       GameInterface,
                       GameLogic,
-                      Timer   
+                      Timer,
+                      TextCards   
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

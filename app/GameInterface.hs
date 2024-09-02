@@ -1,6 +1,7 @@
 module GameInterface (displayBoard, getUserAction) where
 
 import Minesweeper
+    ( Board, Cell(Number, Mine), State(Flagged, Hidden, Revealed) )
 
 displayBoard :: Board -> IO ()
 displayBoard board = do
