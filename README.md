@@ -53,3 +53,7 @@ Este projeto tem como colaboradores:
 - [Dagbegnon Noel Aklou](https://github.com/Noelakl1995)
 - [José do Bomfim Truta Neto](https://github.com/josetruta)
 - [Igor Tejo Bezerra Ribeiro Nogueira](https://github.com/igortejo)
+
+## Referências
+
+Algumas referências de inspirações para este projeto, para ferramentas e métodos externos utilizadas nele, junto com explicações para algumas funcionalidades pode ser encontrada no arquivo `REFERÊNCIAS.pdf` neste diretório.
